@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Регистрация</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+
+<div class="container">
+    <h1>Редактирование</h1><br>
+    <form th:method="post" th:object="${user}" th:action="@{/account/edit}">
+
+        <input type="text" th:field="*{first_name}" id="title" placeholder="Введите имя" class="form-control"><br>
+        <div th:if="${first_name != null}" th:utext="${first_name}" class="text-danger">...</div><br>
+
+        <input type="text" th:field="*{last_name}" id="last_name" placeholder="Введите фамилию" class="form-control"><br>
+        <div th:if="${last_name != null}" th:utext="${last_name}" class="text-danger">...</div><br>
+
+        <input type="text" th:field="*{email}" id="email" placeholder="Введите Email" class="form-control"><br>
+        <div th:if="${email != null}" th:utext="${email}" class="text-danger">...</div><br>
+
+        <input type="text" th:field="*{nickname}" id="nickname"  placeholder="Введите псевданим" class="form-control"><br>
+        <div th:if="${nickname != null}" th:utext="${nickname}" class="text-danger">...</div><br>
+
+        <input type="password" th:field="*{password}" id="password" placeholder="Введите пароль" class="form-control"><br>
+        <div th:if="${password != null}" th:utext="${password}" class="text-danger">...</div><br>
+
+        <input type="password" th:field="*{checking_password}" id="checking_password" placeholder="Введите пароль повторно" class="form-control"><br>
+        <div th:if="${checking_password != null}" th:utext="${checking_password}" class="text-danger">...</div><br>
+        <button type="submit" class="btn btn-success">Регистрация</button>
+    </form>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

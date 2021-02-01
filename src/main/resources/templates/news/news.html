@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Новости</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+
+<div class="container">
+    <div th:each="el : ${allNews}">
+        <h1 th:text="${el.title}"></h1>
+        <p th:text="${el.anons_news}"></p>
+        <a th:href="'/news/' + ${el.id}">Подробнее</a>
+        <p align="right" th:text="${el.data_news_format}"></p>
+        <hr width="700px" align="left">
+    </div>
+</div>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Статьи подробнее</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+
+<div class="container">
+    <div th:each="el : ${article}">
+        <h1 th:text="${el.title}"></h1>
+        <p th:text="${el.full_text}"></p>
+        <p th:text="'Автор: ' + ${el.author.nickname}"></p>
+
+
+        <div th:if="${error == null}" class="text-danger"><br>
+            <a th:href="'/article/' + ${el.id} + '/edit'">Редактировать</a>
+        </div>
+
+        <div th:if="${error == null}" class="text-danger"><br>
+            <form method="post" th:action="${el.id} + '/remove'">
+                <button type="submit" class="btn btn-success">Удалить</button><br>
+            </form>
+        </div>
+
+
+
+
+        <h1>Комментарии</h1>
+
+        <form method="post" th:action="'/article/' + ${el.id} + '/comment'">
+            <input type="text" name="comment" placeholder="Введите комментарий" class="form-control"><br>
+            <button type="submit" class="btn btn-success">Добавить комментарий</button>
+        </form>
+        <div th:if="${error_comment != null}" th:utext="${error_comment}" class="text-danger">...</div><br>
+        <div th:if="${error_comment_length != null}" th:utext="${error_comment_length}" class="text-danger">...</div><br>
+
+        <div th:each="el : ${allCommentThisArticle}">
+            <h6 th:text="${el.author.nickname}"></h6>
+            <p th:text="${el.comment}"></p>
+            <p1></p1>
+
+            <hr width="700px" align="left">
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

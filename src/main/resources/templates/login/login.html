@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Вход</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+
+<div class="container">
+    <h1>Вход</h1><br>
+    <form name="f" method="post" th:action="@{/perform-login}">
+        <div th:if="${param.error}" class="alert alert-error">
+            Неправильные имя и пароль.
+        </div>
+
+        <div th:if="${param.logout}" class="alert alert-success">
+            You have been logged out.
+        </div>
+
+        <a>Введите Email</a><br>
+        <input type="text" id="login" name="login" class="form-control"><br>
+        <a>Введите пароль</a><br>
+        <input type="password" id="password" name="password" class="form-control"><br>
+        <button type="submit" class="btn btn-success">Вход</button>
+    </form>
+</div>
+
+<div class="container">
+    <a href="/registration">Регистация</a>
+</div>
+
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

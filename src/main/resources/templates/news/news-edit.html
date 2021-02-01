@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Редактирование новости</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+<div class="container">
+    <p><strong>Редактирование новости</strong></p><br>
+    <div th:each="el : ${newsEdit}">
+        <form th:method="post" th:object="${newsEdit}" th:action="'/news/' + ${el.id} + '/edit'">
+            <input type="text" th:field="*{title}" th:value="${el.title}" id="title" class="form-control"><br>
+            <div th:if="${title != null}" th:utext="${title}" class="text-danger">...</div><br>
+
+            <input type="text" th:field="*{anons_news}" th:value="${el.anons_news}" id="anons_news" class="form-control"><br>
+            <div th:if="${anons_news != null}" th:utext="${title}" class="text-danger">...</div><br>
+
+            <textarea th:field="*{full_text}" th:text="${el.full_text}" id="full_text" class="form-control"></textarea><br>
+            <div th:if="${full_text != null}" th:utext="${full_text}" class="text-danger">...</div><br>
+
+            <button type="submit" class="btn btn-success">Редактировать</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

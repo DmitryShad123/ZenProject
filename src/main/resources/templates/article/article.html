@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Статьи</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+
+<div class="container">
+
+    <form method="post" th:action="'/article'">
+        <input type="text" name="nickname" placeholder="Поиск статьи по никнейму" class="form-control"><br>
+        <button type="submit" class="btn btn-success">Поиск</button>
+    </form>
+    <div th:if="error_nickname != null" th:utext="${error_nickname}" class="text-danger">...</div>
+
+    <div th:each="el : ${request}">
+        <h1 th:text="${el.title}"></h1>
+        <p th:text="${el.anons_article}"></p>
+        <a th:href="'/article/' + ${el.id}">Подробнее</a>
+        <p align="right" th:text="'Автор: ' + ${el.author.nickname}"></p>
+        <p align="right" th:text="${el.data_article_format}"></p>
+        <hr width="700px" align="left">
+    </div>
+
+    <div th:each="el : ${articles}">
+        <h1 th:text="${el.title}"></h1>
+        <p th:text="${el.anons_article}"></p>
+        <a th:href="'/article/' + ${el.id}">Подробнее</a>
+        <p align="right" th:text="'Автор: ' + ${el.author.nickname}"></p>
+        <p align="right" th:text="${el.data_article_format}"></p>
+        <hr width="700px" align="left">
+    </div>
+
+
+
+</div>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

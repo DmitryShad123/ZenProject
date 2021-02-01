@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Главная страница</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+
+
+<div class="container">
+
+    <form th:method="post" th:object="${user}" th:action="@{/adminconfig}">
+        <input type="text" name="request" placeholder="Поиск по никнейму" class="form-control"><br>
+        <button type="submit" class="btn btn-success">Поиск</button>
+    </form>
+
+    <div if="request_error != null" th:utext="${request_error}" class="text-danger">...</div><br>
+    <div th:each="el : ${user}">
+        <p th:text="${el.nickname}"></p>
+        <p th:text="${el.role}"></p>
+        <form th:method="post" th:action="'/adminconfig/' + ${el.id} + '/giveadmin'">
+            <button type="submit" class="btn btn-success">Дать права админа</button>
+        </form><br>
+
+        <form th:method="post" th:action="'/adminconfig/' + ${el.id} + '/giveauser'">
+            <button type="submit" class="btn btn-success">Дать обычные права</button>
+        </form><br>
+
+        <form th:method="post" th:action="'/adminconfig/' + ${el.id} + '/givemoder'">
+            <button type="submit" class="btn btn-success">Дать права модератора</button>
+        </form><br>
+        <hr width="700px" align="left">
+    </div>
+
+    <div th:each="el : ${users}">
+        <p th:text="${el.nickname}"></p>
+        <p th:text="${el.role}"></p>
+        <hr width="700px" align="left">
+    </div>
+</div>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

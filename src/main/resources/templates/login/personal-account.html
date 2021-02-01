@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Главная страница</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+
+<div class="container">
+
+    <div th:if="${error != null}">
+        <h4>Пользователь не вошел в систему</h4>
+        <form method="post" th:action="@{/account/registration}">
+            <button type="submit" class="btn btn-success">Вход</button><br>
+        </form><br>
+        <form method="post" th:action="@{/account/login}">
+            <button type="submit" class="btn btn-success">Регистрация</button>
+        </form>
+    </div>
+
+
+    <div th:each="el : ${user}">
+        <h3>Имя Фимилия</h3>
+        <p th:text="${el.first_name + el.last_name}"></p>
+        <h3>Email</h3>
+        <p th:text="${el.email}"></p>
+        <h3>Логин</h3>
+        <p th:text="${el.nickname}"></p>
+        <a th:href="'/account' + '/edit'">Редактировать</a><br>
+        <form method="post" th:action="'/remove'">
+            <button type="submit" class="btn btn-success">Удалить</button><br>
+        </form>
+    </div>
+</div>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

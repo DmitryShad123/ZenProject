@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Добавление новости</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+<div class="container">
+    <p><strong>Добавление новой новости</strong></p><br>
+    <form th:method="post" th:object="${news}" th:action="@{/news/add}">
+
+        <input type="text" th:field="*{title}" id="title" placeholder="Введите название новости" class="form-control"><br>
+        <div th:if="${title != null}" th:utext="${title}" class="text-danger">...</div><br>
+
+        <input type="text" th:field="*{anons_news}" id="anons_news" placeholder="Введите анонс новости" class="form-control"><br>
+        <div th:if="${anons_news != null}" th:utext="${anons_news}" class="text-danger">...</div><br>
+
+        <textarea th:field="*{full_text}" id="full_text" placeholder="Введите полный текст новости" class="form-control"></textarea><br>
+        <div th:if="${full_text != null}" th:utext="${full_text}" class="text-danger">...</div><br>
+
+        <button type="submit" class="btn btn-success">Добавить новость</button><br>
+    </form>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Новости подробнее</title>
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"  ></header>
+
+<div class="container">
+    <div th:each="el : ${news}">
+        <h1 th:text="${el.title}"></h1>
+        <p th:text="${el.full_text}"></p>
+        <p align="right" th:text="${el.data_news_format}"></p>
+        <a th:href="'/news/' + ${el.id} + '/edit'">Редактировать</a>
+        <form method="post" th:action="${el.id} + '/remove'">
+            <button type="submit" class="btn btn-success">Удалить</button>
+        </form>
+    </div>
+</div>
+
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>
